@@ -9,6 +9,10 @@ SOURCE_BASE_DIR=`pwd -P`
 popd > /dev/null
 
 function bazel_clean_and_fetch() {
+  if [ ! -z "$TF_RECONFIGURE" ]; then
+    return
+  fi
+
   bazel clean --expunge
   bazel fetch //tensorflow/...
 }
